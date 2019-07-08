@@ -15,7 +15,7 @@ template <typename matrix>
 std::vector<int> dim(const matrix&);
 
 template <>
-std::vector<int> dim(const std::array<std::vector<double>, 3> m) {
+std::vector<int> dim(const std::array<std::vector<double>, 3>& m) {
     return {3, static_cast<int>(m[0].size())};
 }
 
@@ -38,18 +38,12 @@ quaternion align(const matrix& from, const matrix& to) {
     // Covariance matrix of obj and target
     Eigen::MatrixXd Cov(3,3);
     for (int i = 0; i < 3; ++i) {
-        // calculate mean of coeffcient of object 'from'
-        const double mu_from = std::accumulate(from[i].begin(), from[i].end(), 0);
-
         for (int j = 0; j < 3; ++j) {
-            // calculate mean of coeffcient of object 'to'
-            const double mu_to = std::accumulate(to[j].begin(), to[j].end(), 0);
-
-            std::vector<double> c(N);
+            double c{0};
             for (int n = 0; n < N; ++n) {
-                c[n] = (from[i][n] - mu_from) * (to[j][n] - mu_to) / N;
+                c += from[i][n] * to[j][n];
             }
-            Cov(i, j) = std::accumulate(c.begin(), c.end(), 0);
+            Cov(i, j) = c;
         }
     }
 

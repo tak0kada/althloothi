@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(test_align)
     {
         // ellipsoids
         std::array<std::vector<double>, 3> Sh1 = {{{0, 0, 0, 2}, {0, 1, 0, 0}, {0, 0, 1, 0}}};
-        std::array<std::vector<double>, 3> Sh0 = {{{0, 0, 0, 1}, {0, 2, 0, 0}, {0, 0, 1, 0}}};
+        std::array<std::vector<double>, 3> Sh0 = {{{0, -1, 0, 0}, {0, 0, 0, 2}, {0, 0, 1, 0}}};
         auto qvec = align<quaternion>(Sh1, Sh0);
 
         // rotation around z-axis
@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE(test_align)
     {
         // ellipsoids
         std::array<std::vector<double>, 3> Sh1 = {{{0, 0, 0, 2}, {0, 1, 0, 0}, {0, 0, 1, 0}}};
-        std::array<std::vector<double>, 3> Sh0 = {{{0, 0, 0, 1}, {0, 1, 0, 0}, {0, 0, 2, 0}}};
+        std::array<std::vector<double>, 3> Sh0 = {{{0, 0, 1, 0}, {0, 1, 0, 0}, {0, 0, 0, 2}}};
         auto qvec = align<quaternion>(Sh1, Sh0);
 
         // rotation around y-axis
