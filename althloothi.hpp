@@ -15,7 +15,7 @@ template <typename matrix>
 std::vector<int> dim(const matrix&);
 
 template <>
-std::vector<int> dim(const std::array<std::vector<double>, 3>& m) {
+inline std::vector<int> dim(const std::array<std::vector<double>, 3>& m) {
     return {3, static_cast<int>(m[0].size())};
 }
 
